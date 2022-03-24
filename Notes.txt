@@ -1,0 +1,26 @@
+add packages from nuget
+mudblazor
+add blazord.local storage
+add system.extensions.http //for connection to API
+////////////////////////
+//add mud service in program.cs as 
+builder.Services.AddMudServices();
+/////////////////////////////////Following Code as per Mud Docs
+//@using MudBlazor in _Imports.razor
+//put css file reference & js file reference of mud blazor in index.html also remove bootstrap css as it is not requred now
+//Update code in Main Layout with Mud Layout
+//////////////////////////////////
+
+Tokens can be attached with message handlers, so foreach http request, our token
+will be passed in header of request automatically instead of fetching from local storage
+and adding it with each request.
+AuthorizationMessageHandler class has been created by us for this purpose.
+
+//Added By Us in program.cs
+//builder.Services.AddHttpClient("PlannerApp.Api", client =>
+//{
+//    client.BaseAddress = new Uri("https://plannerapp-api.azurewebsites.net/");
+//}).AddHttpMessageHandler<AuthorizationMessageHandler>();
+
+//builder.Services.AddTransient<AuthorizationMessageHandler>();
+//builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
