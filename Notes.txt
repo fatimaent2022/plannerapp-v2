@@ -1,6 +1,6 @@
 add packages from nuget
 mudblazor
-add blazord.local storage
+add blazord.local storage // for storing user access token
 add system.extensions.http //for connection to API
 ////////////////////////
 //add mud service in program.cs as 
@@ -9,8 +9,9 @@ builder.Services.AddMudServices();
 //@using MudBlazor in _Imports.razor
 //put css file reference & js file reference of mud blazor in index.html also remove bootstrap css as it is not requred now
 //Update code in Main Layout with Mud Layout
-//////////////////////////////////
+1	//////////////////////////////////
 
+////////////////////////////////Adding Token as Header with each http requet to API
 Tokens can be attached with message handlers, so foreach http request, our token
 will be passed in header of request automatically instead of fetching from local storage
 and adding it with each request.
@@ -24,3 +25,41 @@ AuthorizationMessageHandler class has been created by us for this purpose.
 
 //builder.Services.AddTransient<AuthorizationMessageHandler>();
 //builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
+//builder.Services.AddBlazoredLocalStorage();
+
+
+2	/////////////////////////handling authentication "GetAuthenticationState()" is where explicity authentication logic can be implemented.
+we will check if there is any access_token in local storage, if its, user is logged in else not.
+JwtAuthenticationStateProvider is our defined class used for this purpose.
+
+//install package Microsoft.AspNetCore.Components.Authentication//for User Authentication
+//install package System.IdentityModel.Tokens.Jwt//for decoding Jwt Token
+//Add in Program.cs builder.Services.AddAuthorizationCore();//Allows to use Authorize Attribute
+//Add in Program.cs builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
+//Add following usings in _Imports.razor
+@using Microsoft.AspNetCore.Components.Authorization;
+@using Microsoft.AspNetCore.Authorization;
+////ecapsulate code in App.Razor with <CascadingAuthenticationState></CascadingAuthenticationState>
+//also replace routeview tag with following code
+  /*<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(MainLayout)" >
+        <NotAuthorized>
+            <h3>you don't have access to the page.</h3>//Actually we should move user to login page from here.
+
+        </NotAuthorized>
+        
+        </AuthorizeRouteView>
+*/
+add @attribute [Authorize] in fetch data and each component whereever auth is required.
+add following code in Index.razor to show user name if logged in else other label
+
+/*
+<AuthorizeView>
+    <Authorized>
+        <h2>welcome @context.User.FindFirst(System.Security.Claims.ClaimTypes.GivenName).Value</h2>
+    </Authorized>
+<NotAuthorized>
+    <h2>please login</h2>
+</NotAuthorized>
+</AuthorizeView>
+*/
+///////////////////////////////////////////////

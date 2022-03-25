@@ -1,4 +1,5 @@
 using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
@@ -22,5 +23,8 @@ builder.Services.AddMudServices();//Added By Us
 
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClient("PlannerApp.Api"));
+
+builder.Services.AddAuthorizationCore();//Allows to use Authorize Attribute
+builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
 
 await builder.Build().RunAsync();
