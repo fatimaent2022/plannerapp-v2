@@ -9,7 +9,7 @@ public class JwtAuthenticationStateProvider : AuthenticationStateProvider
 
     public JwtAuthenticationStateProvider(ILocalStorageService storage)
     {
-        storage = _storage;
+        _storage=storage;
     }
     public async override Task<AuthenticationState> GetAuthenticationStateAsync()
     {
