@@ -12,7 +12,7 @@
         <MudCardContent>
 
             <MudTextField Label="Email" HelperText="Required" @bind-Value="_model.Email" />
-            <MudTextField InputType="InputType.Password" Label="Email" HelperText="Required" @bind-Value="_model.Password" />
+            <MudTextField InputType="InputType.Password" Label="Password" HelperText="Required" @bind-Value="_model.Password" />
 
             <ValidationSummary />
             @if (!string.IsNullOrEmpty(_errorMessage))
@@ -25,7 +25,7 @@
 
         <MudCardActions>
             <MudButton ButtonType="ButtonType.Submit" Variant="Variant.Filled" Color="Color.Primary" Disabled="_isBusy">Login</MudButton>
-            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1">Create Account</MudButton>
+            <MudButton Variant="Variant.Outlined" Color="Color.Secondary" Class="ml-1" OnClick="RedirectToRegister">Create Account</MudButton>
         </MudCardActions>
 
     </MudCard>

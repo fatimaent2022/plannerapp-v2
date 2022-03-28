@@ -63,4 +63,5 @@ add following code in Index.razor to show user name if logged in else other labe
 </AuthorizeView>
 */
 ///////////////////////////////////////////////
-add fluentvalidation package // for fluent validation 
+add fluentvalidation package // for fluent validation in services project
+add blazored.fluentvalidation package // for fluent validation in frontend project

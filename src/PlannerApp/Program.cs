@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 using MudBlazor.Services;
 using PlannerApp;
+using PlannerApp.Client.Services;
 
 var builder = WebAssemblyHostBuilder.CreateDefault(args);
 builder.RootComponents.Add<App>("#app");
@@ -26,5 +27,5 @@ builder.Services.AddScoped(sp => sp.GetService<IHttpClientFactory>().CreateClien
 
 builder.Services.AddAuthorizationCore();//Allows to use Authorize Attribute
 builder.Services.AddScoped<AuthenticationStateProvider, JwtAuthenticationStateProvider>();
-
+builder.Services.AddHttpClientServices();
 await builder.Build().RunAsync();
