@@ -1,9 +1,26 @@
 ﻿@namespace PlannerApp.Components
+@using PlanerApp.Components
 
 <div class="mt-4"/>
 
-@*UI View Selector*@
-<PlanCardsList FetchPlans="GetPlansAsycn"/>
+
+<MudIconButton Icon="@Icons.Material.Filled.GridView" Color="Color.Primary" Disabled="_isCardsViewEnabled" OnClick="SetCardsView"></MudIconButton>
+<MudIconButton Icon="@Icons.Material.Filled.TableView" Color="Color.Primary" Disabled="@(!_isCardsViewEnabled)" OnClick="SetTableView"></MudIconButton>
+
+
+@if (_isCardsViewEnabled)
+{
+    <PlanCardsList FetchPlans="GetPlansAsycn"/>
+
+}
+else
+{
+    
+    <PlansTable />
+}
+
+
+
 
 @code {
 
